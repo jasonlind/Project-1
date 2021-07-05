@@ -6,7 +6,7 @@ The files in this repository were used to configure the network depicted below.
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the elk-playbook.yml file may be used to install only certain pieces of it, such as Filebeat.
 
-elk-playbook.yml
+[elk-playbook](elk-playbook.yml)
 
 This document contains the following details:
 - Description of the Topologu
@@ -29,42 +29,50 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 - _TODO: What does Metricbeat record?_
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.1   | Linux            |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
+| Jump Box | Gateway  | 10.0.0.4   | Linux            |
+| DVWA-1   | Web App  | 10.0.0.5   | Linux            |
+| DVWA-2   | Web App  | 10.0.0.6   | Linux            |
+| DVWA-3   | Web App  | 10.0.0.7   | Linux            |
+| Elk Server | Log Server | 10.1.0.4 | Linux          |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the load balanacer machine can accept connections from the Internet. Access to this machine is only allowed from the following IP address:
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+- 13.91.218.19
+
+Machines within the network can only be accessed by the Jumpbox Provisioner.
+- Public: 168.62.199.70
+- Private: 10.0.0.4
 
 A summary of the access policies in place can be found in the table below.
 
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Jump Box | Yes/No              | 10.0.0.4   |
+| Load Balancer |  Yes           | 13.91.218.19         |
+| DVWA-1   |  No                 | 10.0.0.5             |
+| DVWA-2   |  No                 | 10.0.0.6             |
+| DVWA-3   |  No                 | 10.0.0.7             |
+| ELK Server | No                | Public: 20.64.234.59 Private: 10.1.0.4 | 
+
 
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+- instead of going from the jump box and then ssh into every machine on the network, one program can be run from the jump box. It will install and configure all of the necessary machines. It allows for full automation of a specific server and reduces configuration errors.
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+- The install-elk.yml file first installs docker
+- 2. Installs a python package manager called pip
+- 3. Installs a Docker python module
+- 4. Expands the virtual memory of the Elk Server (essentially gives the server more ram to handle processing)
+- 5. Download and launch the docker web container
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
