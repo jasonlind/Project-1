@@ -21,12 +21,20 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+Load balancing ensures that the application will be highly available, in addition to restricting access to the network.
+- What aspect of security do load balancers protect? 
+  - A loadbalancer is meant to serve as a specific point of access for a service that is served by multiple machines. This allows high availability models to function properly
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
+- What is the advantage of a jump box?_
+  - A jumpbox or bastion server serves as a gatway to gain entry into a remote network. Many times the primary mode of access is ssh and without the key access is forbidden
+
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the log files and system resources.
+- What does Filebeat watch for?
+  - Filebeat is meant primarily to watch for system logs and forward any changes to the Elasticsearch Host
+
+    
+- What does Metricbeat record?
+  - Metricbeat is used only for gathering metrics and system resources usage for display in Elasticsearch
 
 The configuration details of each machine may be found below.
 
